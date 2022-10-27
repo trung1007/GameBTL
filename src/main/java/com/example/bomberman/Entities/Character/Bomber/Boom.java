@@ -12,25 +12,18 @@ public class Boom extends Character {
     static Object object;
     Bomber bomber;
     public int boomCount = 0;
-
     public int SIZE = GamePanel.SCALED_SIZE;
     public static boolean explored = true; // kiem tra xem da no hay chua
     public boolean isExploring = false; // kiem tra xem co dang no hay khong
-    public  int frameUp;
-    public  int frameDown;
-    public  int frameLeft;
-    public  int frameRight;
-//    public static int x, y;
-    private int maxBoom = 4;
+    public int frameUp;
+    public int frameDown;
+    public int frameLeft;
+    public int frameRight;
+    public static int maxBoom = 4;
 
     boolean checkCollisionBrickUp;
-    public static int sizeBoom=1;
-
-
-    public int NumOfBoom = 1;
-    public boolean NumIncrease;
-//    public int xB, yB;
-
+    public static int sizeBoom = 1;
+    public static int NumOfBoom = 1;
     public static boolean hasBoom;
 
 
@@ -39,27 +32,24 @@ public class Boom extends Character {
         this.bomber = bomber;
         sprites.getBombImage();
     }
-    public Boom(int x, int y){
+
+    public Boom(int x, int y) {
         this.x = x;
         this.y = y;
         sprites.getBombImage();
     }
-    public static void setBoom(Bomber bomber){
+
+    public static void setBoom(Bomber bomber) {
         int row = (bomber.y + GamePanel.SCALED_SIZE / 2) / GamePanel.SCALED_SIZE * GamePanel.SCALED_SIZE;
         int col = (bomber.x + GamePanel.SCALED_SIZE / 2) / GamePanel.SCALED_SIZE * GamePanel.SCALED_SIZE;
-        for(int i = 0; i < bomber.booms.size();i++){
-            if(col == bomber.booms.get(i).x && row == bomber.booms.get(i).y){
+        for (int i = 0; i < bomber.booms.size(); i++) {
+            if (col == bomber.booms.get(i).x && row == bomber.booms.get(i).y) {
                 return;
             }
         }
-        if(bomber.booms.size()<=2){
-            bomber.booms.add(new Boom(col,row));
+        if (bomber.booms.size() < NumOfBoom) {
+            bomber.booms.add(new Boom(col, row));
         }
-
-
-        System.out.println("x: " + bomber.x);
-        System.out.println("y: " + bomber.y);
-
     }
 
 
@@ -67,9 +57,9 @@ public class Boom extends Character {
         int frame = 0;
         for (int i = 1; i <= sizeBoom; i++) {
             if (object.mapObjectNum[(y - i * SIZE) / SIZE][x / SIZE] == 1
-                    ||object.mapObjectNum[(y - i * SIZE) / SIZE][x / SIZE] == 2
-                    ||object.mapObjectNum[(y - i * SIZE) / SIZE][x / SIZE] == 3
-                    ||object.mapObjectNum[(y - i * SIZE) / SIZE][x / SIZE] == 4) {
+                    || object.mapObjectNum[(y - i * SIZE) / SIZE][x / SIZE] == 2
+                    || object.mapObjectNum[(y - i * SIZE) / SIZE][x / SIZE] == 3
+                    || object.mapObjectNum[(y - i * SIZE) / SIZE][x / SIZE] == 4) {
                 break;
             } else {
                 frame++;
@@ -79,13 +69,13 @@ public class Boom extends Character {
         return frameUp;
     }
 
-    public   int FrameDown() {
+    public int FrameDown() {
         int frame = 0;
         for (int i = 1; i <= sizeBoom; i++) {
             if (object.mapObjectNum[(y + i * SIZE) / SIZE][x / SIZE] == 1
                     || object.mapObjectNum[(y + i * SIZE) / SIZE][x / SIZE] == 2
-                    ||object.mapObjectNum[(y + i * SIZE) / SIZE][x / SIZE] == 3
-                    ||object.mapObjectNum[(y + i * SIZE) / SIZE][x / SIZE] == 4) {
+                    || object.mapObjectNum[(y + i * SIZE) / SIZE][x / SIZE] == 3
+                    || object.mapObjectNum[(y + i * SIZE) / SIZE][x / SIZE] == 4) {
 
                 break;
             } else {
@@ -95,14 +85,13 @@ public class Boom extends Character {
         frameDown = frame;
         return frameDown;
     }
-
-    public    int FrameLeft() {
+    public int FrameLeft() {
         int frame = 0;
         for (int i = 1; i <= sizeBoom; i++) {
             if (object.mapObjectNum[y / SIZE][(x - i * SIZE) / SIZE] == 1
                     || object.mapObjectNum[y / SIZE][(x - i * SIZE) / SIZE] == 2
-                    ||object.mapObjectNum[y / SIZE][(x - i * SIZE) / SIZE] == 3
-                    ||object.mapObjectNum[y / SIZE][(x - i * SIZE) / SIZE] == 4) {
+                    || object.mapObjectNum[y / SIZE][(x - i * SIZE) / SIZE] == 3
+                    || object.mapObjectNum[y / SIZE][(x - i * SIZE) / SIZE] == 4) {
                 break;
             } else {
                 frame++;
@@ -111,14 +100,13 @@ public class Boom extends Character {
         frameLeft = frame;
         return frameLeft;
     }
-
-    public   int  FrameRight() {
+    public int FrameRight() {
         int frame = 0;
         for (int i = 1; i <= sizeBoom; i++) {
             if (object.mapObjectNum[y / SIZE][(x + i * SIZE) / SIZE] == 1
                     || object.mapObjectNum[y / SIZE][(x + i * SIZE) / SIZE] == 2
-                    ||object.mapObjectNum[y / SIZE][(x + i * SIZE) / SIZE] == 3
-                    ||object.mapObjectNum[y / SIZE][(x + i * SIZE) / SIZE] == 4) {
+                    || object.mapObjectNum[y / SIZE][(x + i * SIZE) / SIZE] == 3
+                    || object.mapObjectNum[y / SIZE][(x + i * SIZE) / SIZE] == 4) {
                 break;
             } else {
                 frame++;
@@ -127,8 +115,6 @@ public class Boom extends Character {
         frameRight = frame;
         return frameRight;
     }
-
-
     public void drawFrame(Graphics2D g2, BufferedImage image1, BufferedImage image2, int x, int y, int frame, String direction) {
         for (int i = 1; i <= frame; i++) {
             if (i != frame) {
@@ -172,6 +158,7 @@ public class Boom extends Character {
         FrameLeft();
         FrameRight();
     }
+
     public void render(Graphics2D g2, String name, GamePanel gamePanel) {
         if (!explored) {
             BufferedImage image = null;

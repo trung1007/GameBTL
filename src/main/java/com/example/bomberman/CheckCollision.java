@@ -3,18 +3,21 @@ package com.example.bomberman;
 import com.example.bomberman.Entities.Character.Bomber.Boom;
 import com.example.bomberman.Entities.Character.Enemy.Enemies;
 import com.example.bomberman.Entities.Entity;
+
 import static com.example.bomberman.Entities.Character.Bomber.Boom.sizeBoom;
+
 import java.util.Random;
 
 public class CheckCollision {
     GamePanel gamePanel;
     Boom boom;
-    int[] RandomItem = {0, 0, 0, 0, 0, 0, 0, 5, 6, 7};
+    int[] RandomItem = {0, 0, 0, 0, 0, 0, 5, 6, 7, 8, 8};
 
-    public CheckCollision(GamePanel gamePanel,Boom boom) {
+    public CheckCollision(GamePanel gamePanel, Boom boom) {
         this.gamePanel = gamePanel;
         this.boom = boom;
     }
+
     public int RandomNumOfObject(int[] Num) {
         Random random = new Random();
         return Num[random.nextInt(Num.length - 1)];
@@ -73,41 +76,41 @@ public class CheckCollision {
 
 
     public void checkFlameBomb(Boom boom, int countTime, int timeExploring) {
-        if(countTime <= timeExploring){
-            if(boom.frameUp < sizeBoom){
-                if(gamePanel.object.mapObjectNum[boom.y/48 - boom.frameUp -1][boom.x/48] == 2){
-                    gamePanel.object.mapObjectNum[boom.y/48 - boom.frameUp -1][boom.x/48] = 3;
+        if (countTime <= timeExploring) {
+            if (boom.frameUp < sizeBoom) {
+                if (gamePanel.object.mapObjectNum[boom.y / 48 - boom.frameUp - 1][boom.x / 48] == 2) {
+                    gamePanel.object.mapObjectNum[boom.y / 48 - boom.frameUp - 1][boom.x / 48] = 3;
                 }
             }
-            if(boom.frameDown < sizeBoom){
-                if(gamePanel.object.mapObjectNum[boom.y/48 + boom.frameDown +1][boom.x/48] == 2){
-                    gamePanel.object.mapObjectNum[boom.y/48 + boom.frameDown +1][boom.x/48] = 3;
+            if (boom.frameDown < sizeBoom) {
+                if (gamePanel.object.mapObjectNum[boom.y / 48 + boom.frameDown + 1][boom.x / 48] == 2) {
+                    gamePanel.object.mapObjectNum[boom.y / 48 + boom.frameDown + 1][boom.x / 48] = 3;
                 }
             }
-            if(boom.frameLeft < sizeBoom){
-                if(gamePanel.object.mapObjectNum[boom.y/48 ][boom.x/48 - boom.frameLeft - 1] == 2){
-                    gamePanel.object.mapObjectNum[boom.y/48 ][boom.x/48 - boom.frameLeft - 1] = 3;
+            if (boom.frameLeft < sizeBoom) {
+                if (gamePanel.object.mapObjectNum[boom.y / 48][boom.x / 48 - boom.frameLeft - 1] == 2) {
+                    gamePanel.object.mapObjectNum[boom.y / 48][boom.x / 48 - boom.frameLeft - 1] = 3;
                 }
             }
-            if(boom.frameRight < sizeBoom){
-                if(gamePanel.object.mapObjectNum[boom.y/48 ][boom.x/48 + boom.frameRight +1] == 2){
-                    gamePanel.object.mapObjectNum[boom.y/48 ][boom.x/48 + boom.frameRight +1] = 3;
+            if (boom.frameRight < sizeBoom) {
+                if (gamePanel.object.mapObjectNum[boom.y / 48][boom.x / 48 + boom.frameRight + 1] == 2) {
+                    gamePanel.object.mapObjectNum[boom.y / 48][boom.x / 48 + boom.frameRight + 1] = 3;
                 }
             }
-        }else if(countTime <= timeExploring * 2) {
-            if(boom.frameUp < sizeBoom) {
+        } else if (countTime <= timeExploring * 2) {
+            if (boom.frameUp < sizeBoom) {
                 if (gamePanel.object.mapObjectNum[boom.y / 48 - boom.frameUp - 1][boom.x / 48] == 3) {
                     gamePanel.object.mapObjectNum[boom.y / 48 - boom.frameUp - 1][boom.x / 48] = 4;
                 }
             }
             if (boom.frameDown < sizeBoom) {
                 if (gamePanel.object.mapObjectNum[boom.y / 48 + boom.frameDown + 1][boom.x / 48] == 3) {
-                    gamePanel.object.mapObjectNum[boom.y / 48 + boom.frameDown + 1][boom.x / 48] =3;
+                    gamePanel.object.mapObjectNum[boom.y / 48 + boom.frameDown + 1][boom.x / 48] = 3;
                 }
             }
             if (boom.frameLeft < sizeBoom) {
                 if (gamePanel.object.mapObjectNum[boom.y / 48][boom.x / 48 - boom.frameLeft - 1] == 3) {
-                    gamePanel.object.mapObjectNum[boom.y / 48][boom.x / 48 - boom.frameLeft - 1] =3;
+                    gamePanel.object.mapObjectNum[boom.y / 48][boom.x / 48 - boom.frameLeft - 1] = 3;
                 }
             }
             if (boom.frameRight < sizeBoom) {
@@ -115,8 +118,8 @@ public class CheckCollision {
                     gamePanel.object.mapObjectNum[boom.y / 48][boom.x / 48 + boom.frameRight + 1] = 3;
                 }
             }
-        } else if(countTime < timeExploring * 3){
-            if(boom.frameUp < sizeBoom) {
+        } else if (countTime < timeExploring * 3) {
+            if (boom.frameUp < sizeBoom) {
                 if (gamePanel.object.mapObjectNum[boom.y / 48 - boom.frameUp - 1][boom.x / 48] == 3) {
                     gamePanel.object.mapObjectNum[boom.y / 48 - boom.frameUp - 1][boom.x / 48] = 4;
                 }
@@ -137,7 +140,7 @@ public class CheckCollision {
                 }
             }
         } else if (countTime == 20 * 3) {
-            if(boom.frameUp < sizeBoom) {
+            if (boom.frameUp < sizeBoom) {
                 if (gamePanel.object.mapObjectNum[boom.y / 48 - boom.frameUp - 1][boom.x / 48] == 4) {
                     int random = RandomNumOfObject(RandomItem);
                     gamePanel.object.mapObjectNum[boom.y / 48 - boom.frameUp - 1][boom.x / 48] = random;
@@ -162,8 +165,8 @@ public class CheckCollision {
                 }
             }
         }
-        System.out.println("CountTime:"+countTime);
     }
+
     public void checkDie(Entity entity, Boom boom) {
         int entityLeftWorldX = entity.x + entity.solidArea.x;
         int entityRightWorldX = entity.x + entity.solidArea.x + entity.solidArea.width;
@@ -212,12 +215,13 @@ public class CheckCollision {
             }
         }
     }
+
     public boolean checkDieEnemy(Entity entity, Enemies enemies) {
-        if (entity.x + entity.solidArea.x+entity.solidArea.width >= enemies.x
-                && enemies.x + enemies.solidArea.x+enemies.solidArea.width >= entity.x
-                && entity.y + entity.solidArea.y+entity.solidArea.height >= enemies.y
-                && enemies.y + enemies.solidArea.y+enemies.solidArea.height >= entity.y) {
-            entity.CheckDie=true;
+        if (entity.x + entity.solidArea.x + entity.solidArea.width >= enemies.x
+                && enemies.x + enemies.solidArea.x + enemies.solidArea.width >= entity.x
+                && entity.y + entity.solidArea.y + entity.solidArea.height >= enemies.y
+                && enemies.y + enemies.solidArea.y + enemies.solidArea.height >= entity.y) {
+            entity.CheckDie = true;
         }
         return entity.CheckDie;
     }

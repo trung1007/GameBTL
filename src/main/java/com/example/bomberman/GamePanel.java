@@ -18,18 +18,16 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
-    public static final int DEFAULT_SIZE = 16;//16x16tile
+    public static final int DEFAULT_SIZE = 16;
     public static final int SCALE = 3;
-    public static final int SCALED_SIZE = DEFAULT_SIZE * SCALE;// 48x48tile
+    public static final int SCALED_SIZE = DEFAULT_SIZE * SCALE;
     public static final int MAX_SCREEN_COL = 22;
     public static final int MAX_SCREEN_ROW = 16;
-    public static final int SCREEN_WIDTH = SCALED_SIZE * MAX_SCREEN_COL; // 768 pixel
-    public static final int SCREEN_HEIGHT = SCALED_SIZE * MAX_SCREEN_ROW; //576 pixel
-    Graphics2D g2;
+    public static final int SCREEN_WIDTH = SCALED_SIZE * MAX_SCREEN_COL;
+    public static final int SCREEN_HEIGHT = SCALED_SIZE * MAX_SCREEN_ROW;
     double FPS = 60;
-
     public final double ns = 1000000000.0 / FPS;
-    public static int GameState = 0;
+    public static int GameState = 1;
     public Thread gameThread;
     Keyboard keyboard = new Keyboard();
     Mouse mouse = new Mouse(this);
@@ -37,13 +35,9 @@ public class GamePanel extends JPanel implements Runnable {
     public Bomber bomber = new Bomber(this, keyboard);
 
     public Boom boom = new Boom(this, bomber);
-
-    //tao quai cap do 1
-
     public Balloon balloon1 = new Balloon(48 * 10, 48 * 6, bomber, this, boom);
-
     public Balloon balloon2 = new Balloon(48 * 20, 48 * 9, bomber, this, boom);
-    public DuyNgo duyNgo1 = new DuyNgo(48* 2 , 48*12 , bomber, this, boom);
+    public DuyNgo duyNgo1 = new DuyNgo(48* 10 , 48*12 , bomber, this, boom);
     public DuyNgo duyNgo2 = new DuyNgo(48* 18 , 48*12 , bomber, this, boom);
 
     public Frog frog1 = new Frog(48* 7 , 48*10 , bomber, this, boom);
@@ -136,6 +130,10 @@ public class GamePanel extends JPanel implements Runnable {
         }
         if (GamePanel.GameState == 1) {
             menuUI.render(g2);
+        }
+        if(GamePanel.GameState==2){
+            menuUI.GameOverWindow();
+            gameThread=null;
         }
         if (GameState == 3) {
             gameThread = null;
