@@ -49,6 +49,8 @@ public class Object{
             collision[6] = false;
             object[7] = ImageIO.read(getClass().getResourceAsStream("/sprites/powerup_speed.png"));//speed
             collision[7] = false;
+            object[8] = ImageIO.read(getClass().getResourceAsStream("/sprites/extra_life@1.png"));//speed
+            collision[8] = false;
 
 
         }catch (IOException e){
