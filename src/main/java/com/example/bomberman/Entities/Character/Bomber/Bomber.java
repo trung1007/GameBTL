@@ -25,6 +25,7 @@ public class Bomber extends Entity {
         this.keyboard = keyboard;
 
         setDefaultValues();
+        sprites.getPlayerDie();
         sprites.getPlayerImage();
     }
 
@@ -40,17 +41,15 @@ public class Bomber extends Entity {
             setBoom(this);
         }
         if (CheckDie) {
-            /*x=48;
-            y=144;
-            CheckDie = false;*/
-            if (NumLife > 0) {
+            countTime++;
+            if (NumLife >1&&countTime>=70 ) {
                 NumLife--;
-                x = 48;
-                y = 144;
+                countTime=0;
             }
-            if(NumLife==0){
-                GamePanel.GameState = 2;
+            else if(NumLife==1&&countTime>=70){
+                NumLife=0;
             }
+            CheckDie=false;
         }
         if (keyboard.space) {
             hasBoom = true;
@@ -74,7 +73,7 @@ public class Bomber extends Entity {
             }
             collisionOn = false;
             gamePanel.checkCollision.checkTile(this);
-            if (collisionOn == false) {
+            if (!collisionOn) {
                 switch (direction) {
                     case "UP": {
                         y -= speed;
@@ -88,8 +87,6 @@ public class Bomber extends Entity {
                             if (NumOfBoom <= maxBoom) {
                                 NumOfBoom++;
                             }
-
-
                         }
                         if (object.mapObjectNum[y / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] == 7) {
                             object.mapObjectNum[y / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
@@ -245,7 +242,38 @@ public class Bomber extends Entity {
                 break;
             }
         }
+        if(NumLife==0){
+            image=null;
+            BufferedImage imageDie=null;
+            countTime++;
+            if(countTime<=15){
+                imageDie=sprites.PlayerDie1;
+            }
+            else if(countTime<=30){
+                imageDie=sprites.PlayerDie2;
+            }
+            else if(countTime<=45){
+                imageDie=sprites.PlayerDie3;
+            }
+            else if(countTime<=60){
+                imageDie=sprites.PlayerDie4;
+            }
+            else if(countTime<=75){
+                imageDie=sprites.PlayerDie5;
+            }
+            else if(countTime<=90){
+                imageDie=sprites.PlayerDie6;
+            }
+            else if(countTime<105){
+                imageDie=sprites.PlayerDie7;
+            }
+            if(countTime==105){
+                GamePanel.GameState=2;
+            }
+            g2.drawImage(imageDie,x,y,GamePanel.SCALED_SIZE,GamePanel.SCALED_SIZE,null);
+        }
         g2.drawImage(image, x, y, GamePanel.SCALED_SIZE, GamePanel.SCALED_SIZE, null);
     }
+
 
 }

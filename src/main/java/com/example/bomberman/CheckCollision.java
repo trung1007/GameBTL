@@ -183,7 +183,6 @@ public class CheckCollision {
             if (boom.x / GamePanel.SCALED_SIZE == entityRightCol || boom.x / GamePanel.SCALED_SIZE == entityLeftCol) {
                 if ((boom.y - i * GamePanel.SCALED_SIZE) / 48 == entityBotRow) {
                     entity.CheckDie = true;
-                    System.out.println("Die Up");
                 }
             }
         }
@@ -192,7 +191,6 @@ public class CheckCollision {
             if (boom.x / GamePanel.SCALED_SIZE == entityRightCol || boom.x / GamePanel.SCALED_SIZE == entityLeftCol) {
                 if ((boom.y + i * GamePanel.SCALED_SIZE) / 48 == entityTopRow) {
                     entity.CheckDie = true;
-                    System.out.println("Die Up");
                 }
             }
         }
@@ -201,7 +199,6 @@ public class CheckCollision {
             if (boom.y / GamePanel.SCALED_SIZE == entityTopRow || boom.y / GamePanel.SCALED_SIZE == entityBotRow) {
                 if ((boom.x - i * GamePanel.SCALED_SIZE) / 48 == entityRightCol) {
                     entity.CheckDie = true;
-                    System.out.println("Die Up");
                 }
             }
         }
@@ -210,7 +207,6 @@ public class CheckCollision {
             if (boom.y / GamePanel.SCALED_SIZE == entityTopRow || boom.y / GamePanel.SCALED_SIZE == entityBotRow) {
                 if ((boom.x + i * GamePanel.SCALED_SIZE) / 48 == entityLeftCol) {
                     entity.CheckDie = true;
-                    System.out.println("Die Up");
                 }
             }
         }

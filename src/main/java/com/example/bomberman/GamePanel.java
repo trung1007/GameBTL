@@ -132,8 +132,9 @@ public class GamePanel extends JPanel implements Runnable {
             menuUI.render(g2);
         }
         if(GamePanel.GameState==2){
+            gameThread = null;
             menuUI.GameOverWindow();
-            gameThread=null;
+
         }
         if (GameState == 3) {
             gameThread = null;
