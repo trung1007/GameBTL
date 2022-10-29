@@ -36,7 +36,7 @@ public class Balloon extends Enemies {
         }
         collisionOn = false;
         gamePanel.checkCollision.checkTile(this);
-        if (collisionOn == true) {
+        if (collisionOn) {
             directionBalloon = ai.calculateDirection();
         }
         HandlePosition(directionBalloon);
