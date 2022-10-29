@@ -10,26 +10,23 @@ import java.io.IOException;
 public class UI {
     GamePanel gamePanel;
     Font arial_20;
-    BufferedImage gui;
     public UI(GamePanel gamePanel){
         this.gamePanel = gamePanel;
         arial_20 = new Font("Arial", Font.PLAIN, 20);
-        getDashBoard();
-    }
-    public void getDashBoard(){
-        try{
-            gui= ImageIO.read(getClass().getResourceAsStream("/sprites/dashboard.png"));
-        }catch (IOException e){
-            e.printStackTrace();
-        }
     }
     public void draw(Graphics2D g2){
-        g2.drawImage(gui,0,0,GamePanel.SCALED_SIZE*22,GamePanel.SCALED_SIZE*2,null);
-        g2.setFont(new Font("Arial", Font.PLAIN, 20));
-        g2.setColor(Color.CYAN);
-        g2.drawString("SizeBomb: " + gamePanel.boom.sizeBoom, 20, 20 );
-        g2.drawString("Speed: " + gamePanel.bomber.speed, 40, 40 );
-        g2.drawString(String.valueOf(gamePanel.bomber.NumLife), GamePanel.SCALED_SIZE*13+15, 55 );
+        g2.setColor(new Color(193,205,205));
+        g2.fillRect(0,0,GamePanel.SCREEN_WIDTH,GamePanel.SCALED_SIZE);
 
+        g2.setFont(new Font("Arial", Font.PLAIN, 20));
+        g2.setColor(Color.BLACK);
+        g2.drawString("Level 1",GamePanel.SCREEN_WIDTH/2-28,20);
+        g2.drawString("SizeBomb: " + gamePanel.boom.sizeBoom, 20, 40 );
+        g2.drawString("Speed: " + gamePanel.bomber.speed, 150, 40 );
+        g2.drawString("MaxOfBomb: "+gamePanel.boom.maxBoom,270,40);
+        g2.drawString("TimeGoThrough: "+(int)gamePanel.bomber.TimeThroughBrick/35,430,40);
+        g2.drawString("TimeArmor: "+1,630,40);
+        g2.drawString("Time: "+gamePanel.Timer,800,40);
+        g2.drawString("PlayerLife: "+gamePanel.bomber.NumLife, 920, 40 );
     }
 }

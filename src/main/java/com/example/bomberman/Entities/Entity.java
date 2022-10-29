@@ -18,6 +18,8 @@ public abstract class Entity {
 
     public boolean collisionOn = false;
     public boolean CheckDie = false;
-
+    public void render(Graphics2D g2){
+        
+    }
 
 }

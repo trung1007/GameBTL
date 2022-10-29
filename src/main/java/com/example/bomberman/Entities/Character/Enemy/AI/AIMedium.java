@@ -2,20 +2,20 @@ package com.example.bomberman.Entities.Character.Enemy.AI;
 
 import com.example.bomberman.Entities.Character.Bomber.Bomber;
 import com.example.bomberman.Entities.Character.Bomber.Boom;
-import com.example.bomberman.Entities.Character.Enemy.DuyNgo;
+import com.example.bomberman.Entities.Character.Enemy.Broom;
 
 public class AIMedium extends AI {
 
     Bomber bomber;
 
     Boom boom;
-    DuyNgo _duyNgo;
+    Broom _broom;
 
 
-    public AIMedium(Bomber bomber, DuyNgo duyNgo, Boom boom) {
+    public AIMedium(Bomber bomber, Broom broom, Boom boom) {
         this.bomber = bomber;
         this.boom = boom;
-        this._duyNgo = duyNgo;
+        this._broom = broom;
     }
 
     public int calculateDirection() {
@@ -41,13 +41,13 @@ public class AIMedium extends AI {
     }
 
     public int dicrectionRow() {
-        if (bomber.x > _duyNgo.x) return 1;
-        if (bomber.x < _duyNgo.x) return 3;
+        if (bomber.x > _broom.x) return 1;
+        if (bomber.x < _broom.x) return 3;
         return -1;
     }
     public int dicrectionCol(){
-        if (bomber.y < _duyNgo.y) return 0;
-        if (bomber.y > _duyNgo.y) return 2;
+        if (bomber.y < _broom.y) return 0;
+        if (bomber.y > _broom.y) return 2;
         return -1;
     }
 }
