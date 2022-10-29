@@ -16,13 +16,18 @@ public class Bomber extends Entity {
     Keyboard keyboard;
     int spriteCounter = 0;
     int spriteNum = 1;
+    int countTime1 = 0;
+   public int TimeThroughBrick = 0;
+    public boolean GoThroughBrick = false;
 
     public static ArrayList<Boom> booms = new ArrayList<>();
+    public static ArrayList<Integer> NumOfLife = new ArrayList<>();
     public int NumLife = 1;
 
     public Bomber(GamePanel gamePanel, Keyboard keyboard) {
         this.gamePanel = gamePanel;
         this.keyboard = keyboard;
+        NumOfLife.add(1);
 
         setDefaultValues();
         sprites.getPlayerDie();
@@ -36,20 +41,28 @@ public class Bomber extends Entity {
     }
 
     public void update(Object object) {
+
         keyboard.update();
         if (hasBoom) {
             setBoom(this);
         }
+        if (gamePanel.Timer == 300) {
+            NumLife = 0;
+        }
+
         if (CheckDie) {
-            countTime++;
-            if (NumLife >1&&countTime>=70 ) {
+            countTime1++;
+            if (NumLife > 1 && countTime1 >= 50) {
                 NumLife--;
-                countTime=0;
+                countTime1 = 0;
+            } else if (NumLife == 1 && countTime1 >= 70) {
+                NumLife = 0;
+                speed = 0;
             }
-            else if(NumLife==1&&countTime>=70){
-                NumLife=0;
+            if (NumOfLife.size() >= 1) {
+                NumOfLife.remove(0);
             }
-            CheckDie=false;
+            CheckDie = false;
         }
         if (keyboard.space) {
             hasBoom = true;
@@ -73,6 +86,15 @@ public class Bomber extends Entity {
             }
             collisionOn = false;
             gamePanel.checkCollision.checkTile(this);
+            if (GoThroughBrick) {
+                collisionOn = false;
+                //if (object.mapObjectNum[(y) / 48][(x) / 48]== 2||object.mapObjectNum[(y) / 48][(x) / 48]== 1) {
+                    TimeThroughBrick--;
+                    if (TimeThroughBrick ==0) {
+                        GoThroughBrick = false;
+                    }
+                //}
+            }
             if (!collisionOn) {
                 switch (direction) {
                     case "UP": {
@@ -84,7 +106,7 @@ public class Bomber extends Entity {
                         }
                         if (object.mapObjectNum[y / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] == 6) {
                             object.mapObjectNum[y / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
-                            if (NumOfBoom <= maxBoom) {
+                            if (NumOfBoom < maxBoom) {
                                 NumOfBoom++;
                             }
                         }
@@ -95,13 +117,18 @@ public class Bomber extends Entity {
                         if (object.mapObjectNum[y / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] == 8) {
                             object.mapObjectNum[y / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
                             NumLife++;
+                            NumOfLife.add(1);
+                        }
+                        if (object.mapObjectNum[(y) / GamePanel.SCALED_SIZE][(x + GamePanel.SCALED_SIZE / 2) / GamePanel.SCALED_SIZE] == 9) {
+                            object.mapObjectNum[(y) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
+                            GoThroughBrick = true;
+                            TimeThroughBrick=200;
+
                         }
                         break;
                     }
                     case "DOWN": {
                         y += speed;
-
-
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] == 5) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
                             sizeBoom++;
@@ -109,7 +136,7 @@ public class Bomber extends Entity {
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] == 6) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
-                            if (NumOfBoom <= maxBoom) {
+                            if (NumOfBoom < maxBoom) {
                                 NumOfBoom++;
                             }
 
@@ -121,22 +148,25 @@ public class Bomber extends Entity {
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] == 8) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
                             NumLife++;
+                            NumOfLife.add(1);
+                        }
+                        if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] == 9) {
+                            object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
+                            GoThroughBrick = true;
+                            TimeThroughBrick=200;
+
                         }
                         break;
                     }
                     case "LEFT": {
                         x -= speed;
-
-
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] == 5) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] = 0;
                             sizeBoom++;
-
-
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] == 6) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] = 0;
-                            if (NumOfBoom <= maxBoom) {
+                            if (NumOfBoom < maxBoom) {
                                 NumOfBoom++;
                             }
 
@@ -148,6 +178,12 @@ public class Bomber extends Entity {
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] == 8) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] = 0;
                             NumLife++;
+                            NumOfLife.add(1);
+                        }
+                        if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] == 9) {
+                            object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] = 0;
+                            GoThroughBrick = true;
+                            TimeThroughBrick=200;
                         }
                         break;
                     }
@@ -159,7 +195,7 @@ public class Bomber extends Entity {
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 6) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] = 0;
-                            if (NumOfBoom <= maxBoom) {
+                            if (NumOfBoom < maxBoom) {
                                 NumOfBoom++;
                             }
 
@@ -171,6 +207,12 @@ public class Bomber extends Entity {
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 8) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] = 0;
                             NumLife++;
+                            NumOfLife.add(1);
+                        }
+                        if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 9) {
+                            object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] = 0;
+                            GoThroughBrick = true;
+                            TimeThroughBrick=200;
                         }
                         break;
                     }
@@ -190,7 +232,8 @@ public class Bomber extends Entity {
         }
     }
 
-    public void render(Graphics2D g2, String name) {
+    @Override
+    public void render(Graphics2D g2) {
         BufferedImage image = null;
         switch (direction) {
             case "UP" -> {
@@ -242,35 +285,29 @@ public class Bomber extends Entity {
                 break;
             }
         }
-        if(NumLife==0){
-            image=null;
-            BufferedImage imageDie=null;
+        if (NumLife == 0) {
+            image = null;
+            BufferedImage imageDie = null;
             countTime++;
-            if(countTime<=15){
-                imageDie=sprites.PlayerDie1;
+            if (countTime <= 15) {
+                imageDie = sprites.PlayerDie1;
+            } else if (countTime <= 30) {
+                imageDie = sprites.PlayerDie2;
+            } else if (countTime <= 45) {
+                imageDie = sprites.PlayerDie3;
+            } else if (countTime <= 60) {
+                imageDie = sprites.PlayerDie4;
+            } else if (countTime <= 75) {
+                imageDie = sprites.PlayerDie5;
+            } else if (countTime <= 90) {
+                imageDie = sprites.PlayerDie6;
+            } else if (countTime < 105) {
+                imageDie = sprites.PlayerDie7;
             }
-            else if(countTime<=30){
-                imageDie=sprites.PlayerDie2;
+            if (countTime == 105) {
+                GamePanel.GameState = 2;
             }
-            else if(countTime<=45){
-                imageDie=sprites.PlayerDie3;
-            }
-            else if(countTime<=60){
-                imageDie=sprites.PlayerDie4;
-            }
-            else if(countTime<=75){
-                imageDie=sprites.PlayerDie5;
-            }
-            else if(countTime<=90){
-                imageDie=sprites.PlayerDie6;
-            }
-            else if(countTime<105){
-                imageDie=sprites.PlayerDie7;
-            }
-            if(countTime==105){
-                GamePanel.GameState=2;
-            }
-            g2.drawImage(imageDie,x,y,GamePanel.SCALED_SIZE,GamePanel.SCALED_SIZE,null);
+            g2.drawImage(imageDie, x, y, GamePanel.SCALED_SIZE, GamePanel.SCALED_SIZE, null);
         }
         g2.drawImage(image, x, y, GamePanel.SCALED_SIZE, GamePanel.SCALED_SIZE, null);
     }

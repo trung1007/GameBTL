@@ -221,5 +221,14 @@ public class CheckCollision {
         }
         return entity.CheckDie;
     }
+    public boolean checkDieEnemy1(Enemies enemies,Entity entity) {
+        if (entity.x + entity.solidArea.x + entity.solidArea.width >= enemies.x
+                && enemies.x + enemies.solidArea.x + enemies.solidArea.width >= entity.x
+                && entity.y + entity.solidArea.y + entity.solidArea.height >= enemies.y
+                && enemies.y + enemies.solidArea.y + enemies.solidArea.height >= entity.y) {
+            enemies.collisionOn=true;
+        }
+        return entity.CheckDie;
+    }
 }
 

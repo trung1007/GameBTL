@@ -1,13 +1,13 @@
 package com.example.bomberman;
 
-import com.example.bomberman.Entities.*;
 import com.example.bomberman.Entities.Character.Bomber.Bomber;
 import com.example.bomberman.Entities.Character.Bomber.Boom;
 import com.example.bomberman.Entities.Character.Enemy.Balloon;
-import com.example.bomberman.Entities.Character.Enemy.DuyNgo;
+import com.example.bomberman.Entities.Character.Enemy.Broom;
 import com.example.bomberman.Entities.Character.Enemy.Frog;
 import com.example.bomberman.Entities.Object;
 import com.example.bomberman.Menu.MenuUI;
+import com.example.bomberman.Sound.Sound;
 import com.example.bomberman.graphics.UI;
 import com.example.bomberman.input.Keyboard;
 import com.example.bomberman.input.Mouse;
@@ -15,7 +15,6 @@ import static com.example.bomberman.Entities.Character.Bomber.Bomber.booms;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
     public static final int DEFAULT_SIZE = 16;
@@ -29,19 +28,21 @@ public class GamePanel extends JPanel implements Runnable {
     public final double ns = 1000000000.0 / FPS;
     public static int GameState = 1;
     public Thread gameThread;
+    public int Timer=0;
     Keyboard keyboard = new Keyboard();
     Mouse mouse = new Mouse(this);
 
     public Bomber bomber = new Bomber(this, keyboard);
 
     public Boom boom = new Boom(this, bomber);
-    public Balloon balloon1 = new Balloon(48 * 10, 48 * 6, bomber, this, boom);
+    public Balloon balloon1 = new Balloon(48 * 11, 48 * 6, bomber, this, boom);
     public Balloon balloon2 = new Balloon(48 * 20, 48 * 9, bomber, this, boom);
-    public DuyNgo duyNgo1 = new DuyNgo(48* 10 , 48*12 , bomber, this, boom);
-    public DuyNgo duyNgo2 = new DuyNgo(48* 18 , 48*12 , bomber, this, boom);
+    public Broom broom1 = new Broom(48* 11 , 48*12 , bomber, this, boom);
+    public Broom broom2 = new Broom(48* 18 , 48*12 , bomber, this, boom);
 
     public Frog frog1 = new Frog(48* 7 , 48*10 , bomber, this, boom);
     public Frog frog2 = new Frog(48* 13 , 48*8 , bomber, this, boom);
+    public Sound sound=new Sound();
 
     Object object = new Object(this);
     UI ui = new UI(this);
@@ -80,7 +81,8 @@ public class GamePanel extends JPanel implements Runnable {
                 delta--;
                 drawCount++;
             }
-            if (timer >= 1000000000) {
+            if (timer >= 1000000000&&GameState==0) {
+                Timer++;
                 drawCount = 0;
                 timer = 0;
             }
@@ -92,8 +94,8 @@ public class GamePanel extends JPanel implements Runnable {
         balloon1.update(object);
         balloon2.update(object);
 
-        duyNgo1.update(object);
-        duyNgo2.update(object);
+        broom1.update(object);
+        broom2.update(object);
 
         frog1.update(object);
         frog2.update(object);
@@ -110,17 +112,16 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
         if (GamePanel.GameState == 0) {
             object.render(g2);
-            bomber.render(g2, "Bomber");
+            bomber.render(g2);
 
-            balloon1.render(g2, "Balloon");
-            balloon2.render(g2, "Balloon");
+            balloon1.render(g2);
+            balloon2.render(g2);
 
-            duyNgo1.render(g2, "DuyNgo");
-            duyNgo2.render(g2, "DuyNgo");
+            broom1.render(g2);
+            broom2.render(g2);
 
-            frog1.render(g2, "Frog");
-            frog2.render(g2, "Frog");
-
+            frog1.render(g2);
+            frog2.render(g2);
 
             for (int i = 0; i < booms.size(); i++) {
                 booms.get(i).render(g2, "boom",this);
@@ -141,6 +142,18 @@ public class GamePanel extends JPanel implements Runnable {
             System.exit(1);
         }
         g2.dispose();
+    }
+    public void playMusic(int i){
+        sound.setFile(i);
+        sound.play();
+        sound.loop();
+    }
+    public void stopMusic(){
+        sound.stop();
+    }
+    public void playSE(int i){
+        sound.setFile(i);
+        sound.play();
     }
 }
 

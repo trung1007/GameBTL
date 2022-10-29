@@ -15,12 +15,15 @@ public class Sprites {
             PlayerLeft1, PlayerLeft2, PlayerLeft3, PlayerRight1, PlayerRight2, PlayerRight3;
     public BufferedImage PlayerDie1, PlayerDie2, PlayerDie3, PlayerDie4, PlayerDie5, PlayerDie6, PlayerDie7;
     public BufferedImage BalloonUp1, BalloonUp2, BalloonUp3, BalloonDown1, BalloonDown2, BalloonDown3,
-            BalloonLeft1, BalloonLeft2, BalloonLeft3, BalloonRight1, BalloonRight2, BalloonRight3, BalloonDie;
+            BalloonLeft1, BalloonLeft2, BalloonLeft3, BalloonRight1, BalloonRight2, BalloonRight3,
+            BalloonDie1, BalloonDie2, BalloonDie3, BalloonDie4, BalloonDie5;
     public BufferedImage FrogUp1, FrogUp2, FrogUp3, FrogDown1, FrogDown2, FrogDown3,
-            FrogLeft1, FrogLeft2, FrogLeft3, FrogRight1, FrogRight2, FrogRight3;
+            FrogLeft1, FrogLeft2, FrogLeft3, FrogRight1, FrogRight2, FrogRight3,
+            FrogDie1, FrogDie2, FrogDie3, FrogDie4, FrogDie5, FrogDie6, FrogDie7;
 
     public BufferedImage BroomUp1, BroomUp2, BroomUp3, BroomDown1, BroomDown2, BroomDown3,
-            BroomLeft1, BroomLeft2, BroomLeft3, BroomRight1, BroomRight2, BroomRight3;
+            BroomLeft1, BroomLeft2, BroomLeft3, BroomRight1, BroomRight2, BroomRight3,
+            BroomDie1, BroomDie2, BroomDie3, BroomDie4, BroomDie5, BroomDie6, BroomDie7;
 
 
     public void getBombImage() {
@@ -77,17 +80,18 @@ public class Sprites {
             e.printStackTrace();
         }
     }
-    public void getPlayerDie(){
-        try {
-            PlayerDie1=ImageIO.read(getClass().getResourceAsStream("/sprites/dead@1.png"));
-            PlayerDie2=ImageIO.read(getClass().getResourceAsStream("/sprites/dead@2.png"));
-            PlayerDie3=ImageIO.read(getClass().getResourceAsStream("/sprites/dead@3.png"));
-            PlayerDie4=ImageIO.read(getClass().getResourceAsStream("/sprites/dead@4.png"));
-            PlayerDie5=ImageIO.read(getClass().getResourceAsStream("/sprites/dead@5.png"));
-            PlayerDie6=ImageIO.read(getClass().getResourceAsStream("/sprites/dead@6.png"));
-            PlayerDie7=ImageIO.read(getClass().getResourceAsStream("/sprites/dead@7.png"));
 
-        }catch (IOException e){
+    public void getPlayerDie() {
+        try {
+            PlayerDie1 = ImageIO.read(getClass().getResourceAsStream("/sprites/dead@1.png"));
+            PlayerDie2 = ImageIO.read(getClass().getResourceAsStream("/sprites/dead@2.png"));
+            PlayerDie3 = ImageIO.read(getClass().getResourceAsStream("/sprites/dead@3.png"));
+            PlayerDie4 = ImageIO.read(getClass().getResourceAsStream("/sprites/dead@4.png"));
+            PlayerDie5 = ImageIO.read(getClass().getResourceAsStream("/sprites/dead@5.png"));
+            PlayerDie6 = ImageIO.read(getClass().getResourceAsStream("/sprites/dead@6.png"));
+            PlayerDie7 = ImageIO.read(getClass().getResourceAsStream("/sprites/dead@7.png"));
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -106,7 +110,12 @@ public class Sprites {
             BalloonLeft1 = ImageIO.read(getClass().getResourceAsStream("/sprites/balloom@1.png"));
             BalloonLeft2 = ImageIO.read(getClass().getResourceAsStream("/sprites/balloom@2.png"));
             BalloonLeft3 = ImageIO.read(getClass().getResourceAsStream("/sprites/balloom@3.png"));
-            BalloonDie = ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@5.png"));
+            BalloonDie1=ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@1.png"));
+            BalloonDie2=ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@2.png"));
+            BalloonDie3=ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@3.png"));
+            BalloonDie4=ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@4.png"));
+            BalloonDie5=ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@5.png"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -126,12 +135,19 @@ public class Sprites {
             FrogLeft1 = ImageIO.read(getClass().getResourceAsStream("/sprites/frog@1.png"));
             FrogLeft2 = ImageIO.read(getClass().getResourceAsStream("/sprites/frog@2.png"));
             FrogLeft3 = ImageIO.read(getClass().getResourceAsStream("/sprites/frog@3.png"));
+            FrogDie1=ImageIO.read(getClass().getResourceAsStream("/sprites/frog_die@1.png"));
+            FrogDie2=ImageIO.read(getClass().getResourceAsStream("/sprites/frog_die@2.png"));
+            FrogDie3=ImageIO.read(getClass().getResourceAsStream("/sprites/frog_die@3.png"));
+            FrogDie4=ImageIO.read(getClass().getResourceAsStream("/sprites/frog_die@4.png"));
+            FrogDie5=ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@3.png"));
+            FrogDie6=ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@4.png"));
+            FrogDie7=ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@5.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void getDuyNgoImage() {
+    public void getBroomImage() {
         try {
             BroomUp1 = ImageIO.read(getClass().getResourceAsStream("/sprites/broom@1.png"));
             BroomUp2 = ImageIO.read(getClass().getResourceAsStream("/sprites/broom@2.png"));
@@ -145,6 +161,13 @@ public class Sprites {
             BroomLeft1 = ImageIO.read(getClass().getResourceAsStream("/sprites/broom@1.png"));
             BroomLeft2 = ImageIO.read(getClass().getResourceAsStream("/sprites/broom@2.png"));
             BroomLeft3 = ImageIO.read(getClass().getResourceAsStream("/sprites/broom@3.png"));
+            BroomDie1=ImageIO.read(getClass().getResourceAsStream("/sprites/broom_die@1.png"));
+            BroomDie2=ImageIO.read(getClass().getResourceAsStream("/sprites/broom_die@2.png"));
+            BroomDie3=ImageIO.read(getClass().getResourceAsStream("/sprites/broom_die@3.png"));
+            BroomDie4=ImageIO.read(getClass().getResourceAsStream("/sprites/broom_die@4.png"));
+            BroomDie5=ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@3.png"));
+            BroomDie6=ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@4.png"));
+            BroomDie7=ImageIO.read(getClass().getResourceAsStream("/sprites/balloom_die@5.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

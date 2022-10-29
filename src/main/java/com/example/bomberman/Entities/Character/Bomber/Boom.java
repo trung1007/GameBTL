@@ -1,13 +1,13 @@
 package com.example.bomberman.Entities.Character.Bomber;
 
-import com.example.bomberman.Entities.Character.Character;
+import com.example.bomberman.Entities.Entity;
 import com.example.bomberman.GamePanel;
 import com.example.bomberman.Entities.Object;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Boom extends Character {
+public class Boom extends Entity {
     GamePanel gamePanel;
     static Object object;
     Bomber bomber;
@@ -183,8 +183,10 @@ public class Boom extends Character {
                     gamePanel.checkCollision.checkDie(gamePanel.bomber, this);
                     gamePanel.checkCollision.checkDie(gamePanel.balloon1, this);
                     gamePanel.checkCollision.checkDie(gamePanel.balloon2, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.duyNgo1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.duyNgo2, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.broom1, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.broom2, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.frog1, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.frog2, this);
                     g2.drawImage(sprites.BombCenter1, x, y, SIZE, SIZE, null);
                     drawFrame(g2, sprites.BombVer1, sprites.BombUp1, x, y, frameUp, "Up");
                     drawFrame(g2, sprites.BombVer1, sprites.BombDown1, x, y, frameDown, "Down");
@@ -196,8 +198,10 @@ public class Boom extends Character {
                     gamePanel.checkCollision.checkDie(gamePanel.bomber, this);
                     gamePanel.checkCollision.checkDie(gamePanel.balloon1, this);
                     gamePanel.checkCollision.checkDie(gamePanel.balloon2, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.duyNgo1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.duyNgo2, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.broom1, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.broom2, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.frog1, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.frog2, this);
                     g2.drawImage(sprites.BombCenter2, x, y, SIZE, SIZE, null);
                     drawFrame(g2, sprites.BombVer2, sprites.BombUp2, x, y, frameUp, "Up");
                     drawFrame(g2, sprites.BombVer2, sprites.BombDown2, x, y, frameDown, "Down");
@@ -208,8 +212,10 @@ public class Boom extends Character {
                     gamePanel.checkCollision.checkDie(gamePanel.bomber, this);
                     gamePanel.checkCollision.checkDie(gamePanel.balloon1, this);
                     gamePanel.checkCollision.checkDie(gamePanel.balloon2, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.duyNgo1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.duyNgo2, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.broom1, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.broom2, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.frog1, this);
+                    gamePanel.checkCollision.checkDie(gamePanel.frog2, this);
                     g2.drawImage(sprites.BombCenter3, x, y, SIZE, SIZE, null);
                     drawFrame(g2, sprites.BombVer3, sprites.BombUp3, x, y, frameUp, "Up");
                     drawFrame(g2, sprites.BombVer3, sprites.BombDown3, x, y, frameDown, "Down");
