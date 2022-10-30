@@ -33,10 +33,10 @@ public class Mouse implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
-        if (GamePanel.GameState == 1) {
+        if (GamePanel.GameState == 0) {
             if (mx >= 96 && mx <= 96 + 196) {
                 if (my >= 192 && my <= 192 + 48) {
-                    GamePanel.GameState = 0;
+                    GamePanel.GameState = 1;
                 }
 
             }
@@ -59,7 +59,7 @@ public class Mouse implements MouseListener {
     public void mousePressed(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
-        if (GamePanel.GameState == 1) {
+        if (GamePanel.GameState == 0) {
             if (mx >= 96 && mx <= 96 + 196) {
                 if (my >= 192 && my <= 192 + 48) {
                     MenuOption.setColorNum = 2;
@@ -84,7 +84,7 @@ public class Mouse implements MouseListener {
     public void mouseReleased(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
-        if (GamePanel.GameState == 1) {
+        if (GamePanel.GameState == 0) {
             if (mx < 96 || mx > 96 + 196) {
                 if (my < 192 || my > 192 + 48) {
                     MenuOption.setColorNum = 1;
