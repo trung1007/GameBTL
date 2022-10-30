@@ -39,12 +39,13 @@ public class Balloon extends Enemies {
         collisionOn = false;
         gamePanel.checkCollision.checkTile(this);
         for (int i = 0; i < bomber.booms.size(); i++) {
-            gamePanel.checkCollision.checkDieEnemy1(this, bomber.booms.get(i));
+            gamePanel.checkCollision.checkCollisionBoom(this, bomber.booms.get(i));
         }
         if (collisionOn) {
             directionBalloon = ai.calculateDirection();
         }
         HandlePosition(directionBalloon);
+        gamePanel.checkCollision.checkDieEnemy(bomber,this);
     }
     @Override
     public void render(Graphics2D g2) {
@@ -118,6 +119,9 @@ public class Balloon extends Enemies {
             }
             if(countTime==TimeDieLoop*5){
                 image=null;
+                x=0;
+                y=0;
+                gamePanel.NumOfBoss --;
             }
         }
         g2.drawImage(image, x, y, GamePanel.SCALED_SIZE, GamePanel.SCALED_SIZE, null);

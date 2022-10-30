@@ -24,8 +24,8 @@ public class UI {
         g2.drawString("SizeBomb: " + gamePanel.boom.sizeBoom, 20, 40 );
         g2.drawString("Speed: " + gamePanel.bomber.speed, 150, 40 );
         g2.drawString("MaxOfBomb: "+gamePanel.boom.maxBoom,270,40);
-        g2.drawString("TimeGoThrough: "+(int)gamePanel.bomber.TimeThroughBrick/35,430,40);
-        g2.drawString("TimeArmor: "+1,630,40);
+        g2.drawString("TimeGoThrough: "+gamePanel.bomber.TimeThroughBrick/60,430,40);
+        g2.drawString("TimeArmor: "+gamePanel.bomber.TimeArmor/60,630,40);
         g2.drawString("Time: "+gamePanel.Timer,800,40);
         g2.drawString("PlayerLife: "+gamePanel.bomber.NumLife, 920, 40 );
     }

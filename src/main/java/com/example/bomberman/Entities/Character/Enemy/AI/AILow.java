@@ -16,7 +16,10 @@ public class AILow extends AI {
         return i;
     }
 
+    public int calculateDirectionRandom() {
+        int i;
+        i = random.nextInt(4);
+        return i;
+    }
 
 }
-
-

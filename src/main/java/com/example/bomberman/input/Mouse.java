@@ -18,12 +18,12 @@ public class Mouse implements MouseListener {
     public void HelpWindow(){
         JFrame frameHelp=new JFrame("Help!");
         try {
-            frameHelp.setContentPane(new JLabel(new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/sprites/Menu_Help.jpg")))));
+            frameHelp.setContentPane(new JLabel(new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/sprites/Menu_Help1.jpg")))));
         } catch (IOException e) {
             e.printStackTrace();
         }
         frameHelp.setLocationRelativeTo(null);
-        frameHelp.setLocation(300,100);
+        frameHelp.setLocation(257,70);
         frameHelp.pack();
         frameHelp.setVisible(true);
     }

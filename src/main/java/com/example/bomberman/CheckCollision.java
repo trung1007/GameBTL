@@ -167,7 +167,7 @@ public class CheckCollision {
         }
     }
 
-    public void checkDie(Entity entity, Boom boom) {
+    public void checkDieByFlame(Entity entity, Boom boom) {
         int entityLeftWorldX = entity.x + entity.solidArea.x;
         int entityRightWorldX = entity.x + entity.solidArea.x + entity.solidArea.width;
         int entityTopWorldY = entity.y + entity.solidArea.y;
@@ -221,7 +221,7 @@ public class CheckCollision {
         }
         return entity.CheckDie;
     }
-    public boolean checkDieEnemy1(Enemies enemies,Entity entity) {
+    public boolean checkCollisionBoom(Enemies enemies, Entity entity) {
         if (entity.x + entity.solidArea.x + entity.solidArea.width >= enemies.x
                 && enemies.x + enemies.solidArea.x + enemies.solidArea.width >= entity.x
                 && entity.y + entity.solidArea.y + entity.solidArea.height >= enemies.y
@@ -231,4 +231,3 @@ public class CheckCollision {
         return entity.CheckDie;
     }
 }
-
