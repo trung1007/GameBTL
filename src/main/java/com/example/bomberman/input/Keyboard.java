@@ -1,5 +1,7 @@
 package com.example.bomberman.input;
 
+import com.example.bomberman.GamePanel;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -7,10 +9,12 @@ import java.awt.event.KeyListener;
  * Tiếp nhận và xử lý các sự kiện nhập từ bàn phím
  */
 public class Keyboard implements KeyListener {
-
+    GamePanel gamePanel;
     private boolean[] keys = new boolean[120]; //120 is enough to this game
     public boolean up, down, left, right, space,pause,xpause;
-
+    public Keyboard(GamePanel gamePanel){
+        this.gamePanel = gamePanel;
+    }
     public void update() {
         up = keys[KeyEvent.VK_UP] || keys[KeyEvent.VK_W];
         down = keys[KeyEvent.VK_DOWN] || keys[KeyEvent.VK_S];
@@ -27,6 +31,13 @@ public class Keyboard implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         keys[e.getKeyCode()] = true;
+        if(e.getKeyCode() == KeyEvent.VK_P){
+            if(GamePanel.GameState == 1){
+                GamePanel.GameState = 4;
+            } else if(GamePanel.GameState == 4){
+                GamePanel.GameState = 1;
+            }
+        }
 
     }
     @Override

@@ -120,11 +120,13 @@ public class Bomber extends Entity {
                         if (object.mapObjectNum[(y) / GamePanel.SCALED_SIZE][(x + GamePanel.SCALED_SIZE / 2) / GamePanel.SCALED_SIZE] == 9) {
                             object.mapObjectNum[(y) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
                             GoThroughBrick = true;
-                            TimeThroughBrick = 300;
+                            TimeThroughBrick = 350;
 
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 99) {
-                            GamePanel.Level=2;
+                            object.nextMap = true;
+                            GamePanel.Level++;
+
                         }
                         break;
                     }
@@ -158,11 +160,13 @@ public class Bomber extends Entity {
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] == 9) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
                             GoThroughBrick = true;
-                            TimeThroughBrick = 300;
+                            TimeThroughBrick = 350;
 
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 99) {
-                            GamePanel.Level=2;
+
+                            object.nextMap = true;
+                            GamePanel.Level++;
                         }
                         break;
                     }
@@ -195,10 +199,12 @@ public class Bomber extends Entity {
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] == 9) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] = 0;
                             GoThroughBrick = true;
-                            TimeThroughBrick = 300;
+                            TimeThroughBrick = 350;
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 99) {
-                            GamePanel.Level=2;
+
+                            object.nextMap = true;
+                            GamePanel.Level++;
                         }
                         break;
                     }
@@ -230,10 +236,11 @@ public class Bomber extends Entity {
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 9) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] = 0;
                             GoThroughBrick = true;
-                            TimeThroughBrick = 300;
+                            TimeThroughBrick = 350;
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 99) {
-                            GamePanel.Level=2;
+                            object.nextMap = true;
+                            GamePanel.Level++;
                         }
                         break;
                     }

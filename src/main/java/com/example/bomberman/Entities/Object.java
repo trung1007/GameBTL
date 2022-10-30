@@ -10,12 +10,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import static com.example.bomberman.Entities.Character.Bomber.Boom.NumOfBoom;
+import static com.example.bomberman.Entities.Character.Bomber.Boom.sizeBoom;
+
 public class Object{
     GamePanel gamePanel;
-    public String NameOfObject;
+    Graphics2D g2;
     public BufferedImage[] object = new BufferedImage[100];
     public  boolean[] collision = new boolean[100];
     public static int[][] mapObjectNum;
+    public boolean nextMap=false;
 
 
 
@@ -23,7 +27,7 @@ public class Object{
         this.gamePanel = gamePanel;
         mapObjectNum = new int[GamePanel.MAX_SCREEN_ROW][GamePanel.MAX_SCREEN_COL];
         getObjectImage();
-        loadMap();
+        loadMap("/levels/map.txt");
     }
     public void getObjectImage(){
         try{
@@ -60,27 +64,17 @@ public class Object{
         }
     }
 
+
     public void win(){
-        if(gamePanel.NumOfBoss ==0){
+        if(GamePanel.NumOfBoss ==0&&!nextMap){
             mapObjectNum[2][4] = 99;
         }
+
     }
-    public void loadMap(){
-        String MapLevel="";
-        if(GamePanel.Level==1){
-            MapLevel="/levels/map.txt";
-        }
-        if(GamePanel.Level==2){
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            MapLevel="/levels/map2.txt";
-        }
+    public void loadMap(String LevelMap){
+
         try{
-            InputStream is = getClass().getResourceAsStream(MapLevel);
+            InputStream is = getClass().getResourceAsStream(LevelMap);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
             for(int i = 0; i < GamePanel.MAX_SCREEN_ROW; i++){
                 String line = bufferedReader.readLine();
@@ -95,10 +89,25 @@ public class Object{
             e.printStackTrace();
         }
     }
+    public void update(){
+        if(nextMap){
+            if(GamePanel.Level==2){
+                loadMap("/levels/map2.txt");
+            }
+            if(GamePanel.Level==3){
+                loadMap("/levels/map3.txt");
+            }
+            nextMap = false;
+        }
+        if(GamePanel.Level == 2){
+            GamePanel.NumOfBoss = 2;
+        }
+        if(GamePanel.Level==3){
+            GamePanel.NumOfBoss =6;
+        }
+    }
 
     public void render(Graphics2D g2){
-        //loadMap();
-        //win();
         int x = 0;// vi tri x
         int y = 0; // vi tri y
         for(int i = 0; i < GamePanel.MAX_SCREEN_ROW; i++){
