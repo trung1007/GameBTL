@@ -9,8 +9,8 @@ public class Sound {
     Clip clip;
     URL soundURL[] = new URL[30];
     public Sound(){
-        soundURL[0] = getClass().getResource("/sound/item.wav");
-        soundURL[1] = getClass().getResource("/sound/set_boom.wav");
+        soundURL[0] = getClass().getResource("/Sounds/Für-Elise-MP3.wav");
+        soundURL[1] = getClass().getResource("/Sounds/mixkit-crickets-and-insects-in-the-wild-ambience-39.wav");
         soundURL[2] = getClass().getResource("/sound/boom_bang.wav");
         soundURL[3] = getClass().getResource("/sound/move.wav");
         soundURL[4] = getClass().getResource("/sound/background.wav");

@@ -13,34 +13,46 @@ public class Broom extends Enemies {
     GamePanel gamePanel;
     Bomber bomber;
     protected int directionDuyNgo;
+    public int lastX, lastY;
     protected AI ai;
 
     public Broom(int _x, int _y, Bomber bomber, GamePanel gamePanel, Boom boom) {
         this.bomber = bomber;
         this.gamePanel = gamePanel;
-        setDefaultValues();
         sprites.getBroomImage();
         ai = new AIMedium(bomber, this, boom);
         x = _x;
         y = _y;
+        setDefaultValues();
     }
 
     @Override
     public void setDefaultValues() {
         speed = 3;
+        lastX = x;
+        lastY = y;
+
     }
 
 
     @Override
     public void update(Object object) {
+        if(Math.abs(lastX - x) == 48 ){
+            directionDuyNgo = ai.calculateDirection();
+            lastX = x;
+        }
+        if(Math.abs(lastY - y) == 48 ){
+            directionDuyNgo = ai.calculateDirection();
+            lastY = y;
+        }
         if (CheckDie) {
-           speed=0;
-           die=true;
+            speed=0;
+            die=true;
         }
         collisionOn = false;
         gamePanel.checkCollision.checkTile(this);
         for (int i = 0; i < bomber.booms.size(); i++) {
-            gamePanel.checkCollision.checkDieEnemy1(this, bomber.booms.get(i));
+            gamePanel.checkCollision.checkCollisionBoom(this, bomber.booms.get(i));
         }
         if (collisionOn == true) {
             directionDuyNgo = ai.calculateDirection();
@@ -135,6 +147,9 @@ public class Broom extends Enemies {
             }
             if(countTime==TimeDieLoop*7){
                 image=null;
+                x=0;
+                y=0;
+                gamePanel.NumOfBoss --;
             }
         }
         g2.drawImage(image, x, y, GamePanel.SCALED_SIZE, GamePanel.SCALED_SIZE, null);

@@ -8,60 +8,67 @@ import com.example.bomberman.Entities.Object;
 import com.example.bomberman.GamePanel;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Frog extends Enemies {
     GamePanel gamePanel;
 
     Bomber bomber;
 
-    Boom boom;
+    public int lastXFrog, lastYFrog;
 
     protected int directionFrog;
 
     protected AI ai;
 
     public Frog(int _x, int _y, Bomber bomber, GamePanel gamePanel, Boom boom) {
-
+        this.bomber = bomber;
         this.gamePanel = gamePanel;
-        setDefaultValues();
         sprites.getFrogImage();
         ai = new AIMedium2(bomber, this, boom);
-        this.bomber = bomber;
         x = _x;
         y = _y;
+        setDefaultValues();
     }
 
     @Override
     public void setDefaultValues() {
         speed = 3;
+        lastXFrog = x;
+        lastYFrog = y;
     }
 
     @Override
     public void update(Object object) {
-        collisionOn = false;
-        if ((bomber.x - this.x) * (bomber.x - this.x)
-                + (bomber.y - this.y) * (bomber.y - this.y) <= 48 * 48 * 5 * 5) {
+        if(Math.abs(bomber.x - x) <= 48 * 3 || Math.abs(bomber.y - y) <= 48 * 3){
             speed = 4;
-            directionFrog = ai.calculateDirection();
-        } else {
+        }
+        if(Math.abs(bomber.x - x) >= 48 * 3 && Math.abs(bomber.y - y) >= 48 * 3){
             speed = 3;
+        }
+        if(Math.abs(lastXFrog - x) >= 48 ){
+            directionFrog = ai.calculateDirection();
+            lastXFrog = x;
+        }
+        if(Math.abs(lastYFrog - y) >= 48 ){
+            directionFrog = ai.calculateDirection();
+            lastYFrog = y;
         }
         if (CheckDie) {
             speed=0;
             die=true;
         }
+        collisionOn = false;
         gamePanel.checkCollision.checkTile(this);
         for (int i = 0; i < bomber.booms.size(); i++) {
-            gamePanel.checkCollision.checkDieEnemy1(this, bomber.booms.get(i));
+            gamePanel.checkCollision.checkCollisionBoom(this, bomber.booms.get(i));
         }
         if (collisionOn == true) {
-            directionFrog = ai.calculateDirection();
+            directionFrog = ai.calculateDirectionRandom();
         }
         HandlePosition(directionFrog);
         gamePanel.checkCollision.checkDieEnemy(bomber, this);
     }
-@Override
+    @Override
     public void render(Graphics2D g2) {
         switch (direction) {
             case "UP" -> {
@@ -140,10 +147,11 @@ public class Frog extends Enemies {
             }
             if(countTime==TimeDieLoop*7){
                 image=null;
+                x=0;
+                y=0;
+                gamePanel.NumOfBoss --;
             }
         }
         g2.drawImage(image, x, y, GamePanel.SCALED_SIZE, GamePanel.SCALED_SIZE, null);
     }
 }
-
-

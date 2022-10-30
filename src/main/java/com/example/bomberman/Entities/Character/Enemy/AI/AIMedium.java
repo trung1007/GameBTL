@@ -23,6 +23,12 @@ public class AIMedium extends AI {
         return findDirection();
     }
 
+    public int calculateDirectionRandom() {
+        int i;
+        i = random.nextInt(4);
+        return i;
+    }
+
     public int findDirection() {
         int way = random.nextInt(10);
         if (way % 2 == 0) {

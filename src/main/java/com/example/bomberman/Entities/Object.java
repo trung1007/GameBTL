@@ -39,8 +39,6 @@ public class Object{
             collision[3] = true;
             object[4] = ImageIO.read(getClass().getResourceAsStream("/sprites/brick_explosion@3.png")); // brick
             collision[4] = true;
-
-
             //get item image
 
             object[5] = ImageIO.read(getClass().getResourceAsStream("/sprites/powerup_bombpass.png")); //size bomb
@@ -49,20 +47,40 @@ public class Object{
             collision[6] = false;
             object[7] = ImageIO.read(getClass().getResourceAsStream("/sprites/powerup_speed.png"));//speed
             collision[7] = false;
-            object[8] = ImageIO.read(getClass().getResourceAsStream("/sprites/extra_life@1.png"));//speed
+            object[8] = ImageIO.read(getClass().getResourceAsStream("/sprites/armor@1.png"));//speed
             collision[8] = false;
             object[9]=ImageIO.read(getClass().getResourceAsStream("/sprites/go_through_brick@1.png"));
             collision[9]=false;
 
+            object[99] = ImageIO.read(getClass().getResourceAsStream("/sprites/portal@2.png"));
 
 
         }catch (IOException e){
             e.printStackTrace();
         }
     }
+
+    public void win(){
+        if(gamePanel.NumOfBoss ==0){
+            mapObjectNum[2][4] = 99;
+        }
+    }
     public void loadMap(){
+        String MapLevel="";
+        if(GamePanel.Level==1){
+            MapLevel="/levels/map.txt";
+        }
+        if(GamePanel.Level==2){
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            MapLevel="/levels/map2.txt";
+        }
         try{
-            InputStream is = getClass().getResourceAsStream("/levels/map.txt");
+            InputStream is = getClass().getResourceAsStream(MapLevel);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
             for(int i = 0; i < GamePanel.MAX_SCREEN_ROW; i++){
                 String line = bufferedReader.readLine();
@@ -79,6 +97,8 @@ public class Object{
     }
 
     public void render(Graphics2D g2){
+        //loadMap();
+        //win();
         int x = 0;// vi tri x
         int y = 0; // vi tri y
         for(int i = 0; i < GamePanel.MAX_SCREEN_ROW; i++){
@@ -91,5 +111,7 @@ public class Object{
             y += GamePanel.SCALED_SIZE;
         }
     }
+
+
 
 }

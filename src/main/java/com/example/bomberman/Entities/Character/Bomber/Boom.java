@@ -20,8 +20,7 @@ public class Boom extends Entity {
     public int frameLeft;
     public int frameRight;
     public static int maxBoom = 4;
-
-    boolean checkCollisionBrickUp;
+    public static int MaxSizeBoom=3;
     public static int sizeBoom = 1;
     public static int NumOfBoom = 1;
     public static boolean hasBoom;
@@ -180,13 +179,20 @@ public class Boom extends Entity {
             if (isExploring) {
                 if (countTime <= timeExploring) {
                     gamePanel.checkCollision.checkFlameBomb(this, countTime, timeExploring);
-                    gamePanel.checkCollision.checkDie(gamePanel.bomber, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.balloon1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.balloon2, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.broom1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.broom2, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.frog1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.frog2, this);
+
+                    gamePanel.checkCollision.checkDieByFlame(gamePanel.bomber, this);
+
+                    for(int i = 0; i<gamePanel.balloonList.size(); i++){
+                        gamePanel.checkCollision.checkDieByFlame(gamePanel.balloonList.get(i), this);
+                    }
+
+                    for(int i =0; i<gamePanel.broomList.size();i++){
+                        gamePanel.checkCollision.checkDieByFlame(gamePanel.broomList.get(i), this);
+                    }
+
+                    for(int i =0; i<gamePanel.frogList.size();i++){
+                        gamePanel.checkCollision.checkDieByFlame(gamePanel.frogList.get(i), this);
+                    }
                     g2.drawImage(sprites.BombCenter1, x, y, SIZE, SIZE, null);
                     drawFrame(g2, sprites.BombVer1, sprites.BombUp1, x, y, frameUp, "Up");
                     drawFrame(g2, sprites.BombVer1, sprites.BombDown1, x, y, frameDown, "Down");
@@ -195,13 +201,18 @@ public class Boom extends Entity {
 
                 } else if (countTime <= timeExploring * 2) {
                     gamePanel.checkCollision.checkFlameBomb(this, countTime, timeExploring);
-                    gamePanel.checkCollision.checkDie(gamePanel.bomber, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.balloon1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.balloon2, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.broom1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.broom2, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.frog1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.frog2, this);
+                    gamePanel.checkCollision.checkDieByFlame(gamePanel.bomber, this);
+                    for(int i = 0; i<gamePanel.balloonList.size(); i++){
+                        gamePanel.checkCollision.checkDieByFlame(gamePanel.balloonList.get(i), this);
+                    }
+
+                    for(int i =0; i<gamePanel.broomList.size();i++){
+                        gamePanel.checkCollision.checkDieByFlame(gamePanel.broomList.get(i), this);
+                    }
+
+                    for(int i =0; i<gamePanel.frogList.size();i++){
+                        gamePanel.checkCollision.checkDieByFlame(gamePanel.frogList.get(i), this);
+                    }
                     g2.drawImage(sprites.BombCenter2, x, y, SIZE, SIZE, null);
                     drawFrame(g2, sprites.BombVer2, sprites.BombUp2, x, y, frameUp, "Up");
                     drawFrame(g2, sprites.BombVer2, sprites.BombDown2, x, y, frameDown, "Down");
@@ -209,13 +220,18 @@ public class Boom extends Entity {
                     drawFrame(g2, sprites.BombHor2, sprites.BombRight2, x, y, frameRight, "Right");
                 } else if (countTime <= timeExploring * 3) {
                     gamePanel.checkCollision.checkFlameBomb(this, countTime, timeExploring);
-                    gamePanel.checkCollision.checkDie(gamePanel.bomber, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.balloon1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.balloon2, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.broom1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.broom2, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.frog1, this);
-                    gamePanel.checkCollision.checkDie(gamePanel.frog2, this);
+                    gamePanel.checkCollision.checkDieByFlame(gamePanel.bomber, this);
+                    for(int i = 0; i<gamePanel.balloonList.size(); i++){
+                        gamePanel.checkCollision.checkDieByFlame(gamePanel.balloonList.get(i), this);
+                    }
+
+                    for(int i =0; i<gamePanel.broomList.size();i++){
+                        gamePanel.checkCollision.checkDieByFlame(gamePanel.broomList.get(i), this);
+                    }
+
+                    for(int i =0; i<gamePanel.frogList.size();i++){
+                        gamePanel.checkCollision.checkDieByFlame(gamePanel.frogList.get(i), this);
+                    }
                     g2.drawImage(sprites.BombCenter3, x, y, SIZE, SIZE, null);
                     drawFrame(g2, sprites.BombVer3, sprites.BombUp3, x, y, frameUp, "Up");
                     drawFrame(g2, sprites.BombVer3, sprites.BombDown3, x, y, frameDown, "Down");

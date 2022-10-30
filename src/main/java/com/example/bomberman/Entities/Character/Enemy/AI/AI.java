@@ -12,4 +12,5 @@ public abstract class AI {
      */
     public abstract int calculateDirection();
 
+    public abstract int calculateDirectionRandom();
 }
