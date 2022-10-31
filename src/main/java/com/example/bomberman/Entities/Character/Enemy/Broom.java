@@ -55,7 +55,7 @@ public class Broom extends Enemies {
             gamePanel.checkCollision.checkCollisionBoom(this, bomber.booms.get(i));
         }
         if (collisionOn == true) {
-            directionDuyNgo = ai.calculateDirection();
+            directionDuyNgo = ai.calculateDirectionRandom();
         }
         HandlePosition(directionDuyNgo);
         gamePanel.checkCollision.checkDieEnemy(bomber, this);

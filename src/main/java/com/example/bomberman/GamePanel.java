@@ -60,10 +60,19 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
         balloonList.add(new Balloon(48 * 25, 48 * 6, bomber, this, boom));
         balloonList.add(new Balloon(48 * 25, 48 * 9, bomber, this, boom));
+        balloonList.add(new Balloon(48 * 25, 48 * 6, bomber, this, boom));
+        balloonList.add(new Balloon(48 * 25, 48 * 9, bomber, this, boom));
+
         broomList.add(new Broom(48 * 25, 48 * 12, bomber, this, boom));
         broomList.add(new Broom(48 * 25, 48 * 11, bomber, this, boom));
-        frogList.add(new Frog(48 * 25, 48 * 10, bomber, this, boom));
-        frogList.add(new Frog(48 * 25, 48 * 8, bomber, this, boom));
+        broomList.add(new Broom(48 * 25, 48 * 12, bomber, this, boom));
+        broomList.add(new Broom(48 * 25, 48 * 11, bomber, this, boom));
+
+
+        frogList.add(new Frog(48 * 8, 48 * 10, bomber, this, boom));
+        frogList.add(new Frog(48 * 9, 48 * 10, bomber, this, boom));
+        frogList.add(new Frog(48 * 8, 48 * 14, bomber, this, boom));
+        frogList.add(new Frog(48 * 9, 48 * 14, bomber, this, boom));
     }
 
     public void start() {
@@ -99,17 +108,16 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         if (GameState == 1) {
             if (Level == 1) {
-                for (int i = 0; i < balloonList.size(); i++) {
+                for (int i = 0; i < 2; i++) {
                     balloonList.get(i).update(object);
                 }
-
-                for (int i = 0; i < broomList.size(); i++) {
+                for (int i = 0; i < 2; i++) {
                     broomList.get(i).update(object);
                 }
             }
-
             if (Level == 2) {
-                for (int i = 0; i < frogList.size(); i++) {
+
+                for (int i = 0; i < 2; i++) {
                     frogList.get(i).update(object);
                 }
             }
@@ -117,7 +125,6 @@ public class GamePanel extends JPanel implements Runnable {
                 for (int i = 0; i < balloonList.size(); i++) {
                     balloonList.get(i).update(object);
                 }
-
                 for (int i = 0; i < broomList.size(); i++) {
                     broomList.get(i).update(object);
                 }
@@ -129,13 +136,13 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < booms.size(); i++) {
                 booms.get(i).update(bomber);
             }
+            object.update();
             bomber.update(object);
             menuUI.update();
-            object.update();
+
         }
 
     }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -147,48 +154,49 @@ public class GamePanel extends JPanel implements Runnable {
             object.render(g2);
             bomber.render(g2);
             if (Level == 1) {
-                for (int i = 0; i < balloonList.size(); i++) {
+                for (int i = 0; i < 2; i++) {
                     balloonList.get(i).render(g2);
                 }
 
-                for (int i = 0; i < broomList.size(); i++) {
+                for (int i = 0; i < 2; i++) {
                     broomList.get(i).render(g2);
                 }
             }
 
             if (Level == 2) {
-                for (int i = 0; i < frogList.size(); i++) {
+                for (int i = 0; i < 2; i++) {
                     frogList.get(i).render(g2);
                 }
             }
             if(Level==3){
-                for (int i = 0; i < balloonList.size(); i++) {
+                for (int i = 2; i < balloonList.size(); i++) {
                     balloonList.get(i).render(g2);
                 }
-
-                for (int i = 0; i < broomList.size(); i++) {
+                for (int i = 2; i < broomList.size(); i++) {
                     broomList.get(i).render(g2);
                 }
-                for (int i = 0; i < frogList.size(); i++) {
+                for (int i = 2; i < frogList.size(); i++) {
                     frogList.get(i).render(g2);
                 }
             }
             for (int i = 0; i < booms.size(); i++) {
                 booms.get(i).render(g2, "boom", this);
             }
-            object.win();
             ui.draw(g2);
         }
         if (GameState == 2) {
             gameThread = null;
+            stopMusic();
             menuUI.GameOverWindow();
         }
         if (GameState == 3) {
             gameThread = null;
+            stopMusic();
             System.exit(1);
         }
         if(NumOfBoss==0&&Level==3){
             gameThread=null;
+            stopMusic();
             menuUI.GameWinnerWindow();
         }
 

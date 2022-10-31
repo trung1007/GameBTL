@@ -17,10 +17,12 @@ public class Bomber extends Entity {
     int spriteCounter = 0;
     int spriteNum = 1;
     public int TimeThroughBrick = 0;
-    boolean GoThroughBrick = false;
+    public boolean GoThroughBrick = false;
     public int TimeArmor = 0;
+    public int MaxTimeArmor=100000;
+    public int MaxTimeGoThrough=350;
     public int MaxSpeed=8;
-    boolean Armor;
+    public boolean Armor=false;
     public static ArrayList<Boom> booms = new ArrayList<>();
     public int NumLife = 1;
 
@@ -61,7 +63,7 @@ public class Bomber extends Entity {
             TimeThroughBrick--;
             if (TimeThroughBrick == 0) {
                 GoThroughBrick = false;
-                if(Object.mapObjectNum[(y+24)/48][(x+24)/48]==2|| Object.mapObjectNum[(y+24)/48][(x+24)/48]==1){
+                if(Object.mapObjectNum[(y)/48][(x)/48]==2|| Object.mapObjectNum[(y)/48][(x)/48]==1){
                     CheckDie=true;
                 }
             }
@@ -114,13 +116,13 @@ public class Bomber extends Entity {
                         }
                         if (object.mapObjectNum[y / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] == 8) {
                             object.mapObjectNum[y / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
-                            TimeArmor = 350;
+                            TimeArmor = MaxTimeArmor;
                             Armor = true;
                         }
                         if (object.mapObjectNum[(y) / GamePanel.SCALED_SIZE][(x + GamePanel.SCALED_SIZE / 2) / GamePanel.SCALED_SIZE] == 9) {
                             object.mapObjectNum[(y) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
                             GoThroughBrick = true;
-                            TimeThroughBrick = 350;
+                            TimeThroughBrick = MaxTimeGoThrough;
 
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 99) {
@@ -154,13 +156,13 @@ public class Bomber extends Entity {
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] == 8) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
-                            TimeArmor = 350;
+                            TimeArmor = MaxTimeArmor;
                             Armor = true;
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] == 9) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE] = 0;
                             GoThroughBrick = true;
-                            TimeThroughBrick = 350;
+                            TimeThroughBrick = MaxTimeGoThrough;
 
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 99) {
@@ -193,13 +195,13 @@ public class Bomber extends Entity {
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] == 8) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] = 0;
-                            TimeArmor = 350;
+                            TimeArmor = MaxTimeArmor;
                             Armor = true;
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] == 9) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x) / gamePanel.SCALED_SIZE] = 0;
                             GoThroughBrick = true;
-                            TimeThroughBrick = 350;
+                            TimeThroughBrick = MaxTimeGoThrough;
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 99) {
 
@@ -230,13 +232,13 @@ public class Bomber extends Entity {
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 8) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] = 0;
-                            TimeArmor = 350;
+                            TimeArmor = MaxTimeArmor;
                             Armor = true;
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 9) {
                             object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] = 0;
                             GoThroughBrick = true;
-                            TimeThroughBrick = 350;
+                            TimeThroughBrick = MaxTimeGoThrough;
                         }
                         if (object.mapObjectNum[(y + gamePanel.SCALED_SIZE / 2) / gamePanel.SCALED_SIZE][(x + gamePanel.SCALED_SIZE) / gamePanel.SCALED_SIZE] == 99) {
                             object.nextMap = true;

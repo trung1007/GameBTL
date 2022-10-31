@@ -13,24 +13,23 @@ import java.io.InputStreamReader;
 import static com.example.bomberman.Entities.Character.Bomber.Boom.NumOfBoom;
 import static com.example.bomberman.Entities.Character.Bomber.Boom.sizeBoom;
 
-public class Object{
+public class Object {
     GamePanel gamePanel;
     Graphics2D g2;
     public BufferedImage[] object = new BufferedImage[100];
-    public  boolean[] collision = new boolean[100];
+    public boolean[] collision = new boolean[100];
     public static int[][] mapObjectNum;
-    public boolean nextMap=false;
+    public boolean nextMap = false;
 
-
-
-    public Object(GamePanel gamePanel){
+    public Object(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         mapObjectNum = new int[GamePanel.MAX_SCREEN_ROW][GamePanel.MAX_SCREEN_COL];
         getObjectImage();
         loadMap("/levels/map.txt");
     }
-    public void getObjectImage(){
-        try{
+
+    public void getObjectImage() {
+        try {
             //get tile image
 
             object[0] = ImageIO.read(getClass().getResourceAsStream("/sprites/grass@2.png"));// grass
@@ -53,65 +52,81 @@ public class Object{
             collision[7] = false;
             object[8] = ImageIO.read(getClass().getResourceAsStream("/sprites/armor@1.png"));//speed
             collision[8] = false;
-            object[9]=ImageIO.read(getClass().getResourceAsStream("/sprites/go_through_brick@1.png"));
-            collision[9]=false;
+            object[9] = ImageIO.read(getClass().getResourceAsStream("/sprites/go_through_brick@1.png"));
+            collision[9] = false;
 
             object[99] = ImageIO.read(getClass().getResourceAsStream("/sprites/portal@2.png"));
 
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public void win() {
+        if (GamePanel.NumOfBoss == 0 && !nextMap) {
+            if(GamePanel.Level==1){
+                mapObjectNum[2][4] = 99;
 
-
-    public void win(){
-        if(GamePanel.NumOfBoss ==0&&!nextMap){
-            mapObjectNum[2][4] = 99;
+            }
+            if(GamePanel.Level==2){
+                mapObjectNum[13][5]=99;
+            }
         }
 
     }
-    public void loadMap(String LevelMap){
 
-        try{
+    public void loadMap(String LevelMap) {
+        try {
             InputStream is = getClass().getResourceAsStream(LevelMap);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-            for(int i = 0; i < GamePanel.MAX_SCREEN_ROW; i++){
+            for (int i = 0; i < GamePanel.MAX_SCREEN_ROW; i++) {
                 String line = bufferedReader.readLine();
-                for(int j = 0; j < GamePanel.MAX_SCREEN_COL; j++){
+                for (int j = 0; j < GamePanel.MAX_SCREEN_COL; j++) {
                     String numbers[] = line.split(" ");
                     int num = Integer.parseInt(numbers[j]);
                     mapObjectNum[i][j] = num;
                 }
             }
             bufferedReader.close();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void update(){
-        if(nextMap){
-            if(GamePanel.Level==2){
+
+    public void update() {
+        win();
+        if (nextMap) {
+            if (GamePanel.Level == 2) {
                 loadMap("/levels/map2.txt");
             }
-            if(GamePanel.Level==3){
+            if (GamePanel.Level == 3) {
                 loadMap("/levels/map3.txt");
             }
             nextMap = false;
         }
-        if(GamePanel.Level == 2){
+        if (GamePanel.Level == 2) {
             GamePanel.NumOfBoss = 2;
+//            gamePanel.bomber.speed=4;
+//            gamePanel.bomber.GoThroughBrick=false;
+//            gamePanel.bomber.Armor=false;
+//            sizeBoom=1;
+//            NumOfBoom=1;
         }
-        if(GamePanel.Level==3){
-            GamePanel.NumOfBoss =6;
+        if (GamePanel.Level == 3) {
+            GamePanel.NumOfBoss = 6;
+//            gamePanel.bomber.speed=4;
+//            gamePanel.bomber.GoThroughBrick=false;
+//            gamePanel.bomber.Armor=false;
+//            sizeBoom=1;
+//            NumOfBoom=1;
         }
     }
 
-    public void render(Graphics2D g2){
+    public void render(Graphics2D g2) {
         int x = 0;// vi tri x
         int y = 0; // vi tri y
-        for(int i = 0; i < GamePanel.MAX_SCREEN_ROW; i++){
-            for(int j = 0; j < GamePanel.MAX_SCREEN_COL; j++){
+        for (int i = 0; i < GamePanel.MAX_SCREEN_ROW; i++) {
+            for (int j = 0; j < GamePanel.MAX_SCREEN_COL; j++) {
                 int tileNum = mapObjectNum[i][j];
                 g2.drawImage(object[tileNum], x, y, GamePanel.SCALED_SIZE, GamePanel.SCALED_SIZE, null);
                 x += GamePanel.SCALED_SIZE;
@@ -120,7 +135,6 @@ public class Object{
             y += GamePanel.SCALED_SIZE;
         }
     }
-
 
 
 }

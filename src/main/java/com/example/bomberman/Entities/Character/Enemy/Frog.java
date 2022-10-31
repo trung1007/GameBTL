@@ -40,7 +40,7 @@ public class Frog extends Enemies {
     @Override
     public void update(Object object) {
         if(Math.abs(bomber.x - x) <= 48 * 3 || Math.abs(bomber.y - y) <= 48 * 3){
-            speed = 4;
+            speed = 5;
         }
         if(Math.abs(bomber.x - x) >= 48 * 3 && Math.abs(bomber.y - y) >= 48 * 3){
             speed = 3;

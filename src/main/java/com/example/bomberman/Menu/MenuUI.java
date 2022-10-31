@@ -20,14 +20,14 @@ public class MenuUI {
     MenuOption menuOption3=new MenuOption("EXIT",3,Color.RED);
     MenuBackground menuBackground=new MenuBackground();
     public void GameOverWindow(){
-        JFrame frameExit=new JFrame("Exit!");
+        JFrame frameExit=new JFrame("GameOver!");
         try {
-            frameExit.setContentPane(new JLabel(new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/sprites/game_over.png")))));
+            frameExit.setContentPane(new JLabel(new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/sprites/Menu_Lose.jpg")))));
         } catch (IOException e) {
             e.printStackTrace();
         }
         frameExit.setResizable(true);
-        frameExit.setLocation(300,100);
+        frameExit.setLocation(480,100);
         frameExit.pack();
         frameExit.setVisible(true);
         frameExit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,7 +35,7 @@ public class MenuUI {
     }
 
     public void GameWinnerWindow(){
-        JFrame frameExit=new JFrame("Exit!");
+        JFrame frameExit=new JFrame("Winning!");
         try {
             frameExit.setContentPane(new JLabel(new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/sprites/Winner.jpg")))));
 
